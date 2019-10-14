@@ -1,0 +1,6 @@
+# In all directories within the repo, ignore .ipynb_checkpoints/
+**/.ipynb_checkpoints
+# In all directories within the repo, ignore __pycache__
+**/__pycache__
+# In all directories within the repo, ignore .DS_Store (This isn't needed on linux)
+**/.DS_Store
