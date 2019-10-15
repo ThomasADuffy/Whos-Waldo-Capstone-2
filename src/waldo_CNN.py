@@ -1,24 +1,20 @@
 import numpy as np
-import pandas as pd
-from keras.preprocessing.image import ImageDataGenerator
-from keras.models import Sequential
-from keras.layers import Conv2D, MaxPooling2D
-from keras.layers import Activation, Dropout, Flatten, Dense
-from keras.models import load_model
+from tensorflow.keras.preprocessing.image import ImageDataGenerator
+from tensorflow.keras.models import Sequential
+from tensorflow.keras.layers import Conv2D, MaxPooling2D
+from tensorflow.keras.layers import Activation, Dropout, Flatten, Dense
+from tensorflow.keras.models import load_model
 from skimage import io, transform, color
-from tensorflow.keras.datasets import mnist
 from tensorflow.keras.utils import to_categorical
 import os
 import sys
-np.random.seed(1337)
 
 SCRIPT_DIRECTORY = os.path.realpath(__file__)
-ROOT_DIRECTORY = os.path.split(SCRIPT_DIRECTORY)[0]
+ROOT_DIRECTORY = os.path.split(os.path.split(SCRIPT_DIRECTORY)[0])[0]
 MODEL_DIRECTORY = os.path.join(ROOT_DIRECTORY, 'model')
-sys.path.append(ROOT_DIRECTORY)
 
 
-class WaldoCNN(object):
+class WaldoCNN():
     """This is the CNN class which will build the model and the dataset.
 
     Inputs:
@@ -29,8 +25,8 @@ class WaldoCNN(object):
         version - version of model
         load_model"""
 
-    def __init___(self, batchsize, epochs, train_data_loc,
-                  test_data_loc, version, load_model=False):
+    def __init__(self, batchsize, epochs, train_data_loc,
+                 test_data_loc, version, load_model=False):
         self.batchsize = batchsize
         self.epochs = epochs
         self.train_data_loc = os.path.join(ROOT_DIRECTORY, train_data_loc)
@@ -43,18 +39,20 @@ class WaldoCNN(object):
     def create_dataset_generators(self):
         '''This will create the dataset generators for the model to use'''
 
-        self.train_data = ImageDataGenerator(rescale=1./255)
-        self.test_data = ImageDataGenerator(rescale=1./255)
+        self.train_datagen = ImageDataGenerator(rescale=1./255)
+        self.test_datagen = ImageDataGenerator(rescale=1./255)
         self.train_generator = self.train_datagen.flow_from_directory(
                 self.train_data_loc,
                 batch_size=self.batchsize,
                 class_mode='binary',
-                color_mode='rgb')
+                color_mode='rgb',
+                target_size=(64, 64))
         self.validation_generator = self.test_datagen.flow_from_directory(
                 self.test_data_loc,
                 batch_size=self.batchsize,
                 class_mode='binary',
-                color_mode='rgb')
+                color_mode='rgb',
+                target_size=(64, 64))
 
     def create_model(self):
         '''This will create the hard encoded model'''
@@ -90,14 +88,21 @@ class WaldoCNN(object):
     def fit(self):
         ''' This will fit the model with the data inputed'''
 
-        self.model.fit_generator(self.train_generator, steps_per_epoch=None,
-                                 epochs=self.epochs, verbose=1, callbacks=None,
-                                 validation_data=self.validation_generator,
-                                 validation_steps=None, validation_freq=1,
-                                 class_weight=None, max_queue_size=10,
-                                 workers=1, use_multiprocessing=False,
-                                 shuffle=True, initial_epoch=0)
+        self.hist = self.model.fit_generator(self.train_generator,
+                                             steps_per_epoch=None,
+                                             epochs=self.epochs, verbose=1,
+                                             callbacks=None,
+                                             validation_data=self.validation_generator,
+                                             validation_steps=None,
+                                             validation_freq=1,
+                                             class_weight=None,
+                                             max_queue_size=10,
+                                             workers=1,
+                                             use_multiprocessing=False,
+                                             shuffle=True, initial_epoch=0)
         self.score_model()
+        self.save_question()
+        # self.metrics = WaldoMetrics(self.model)
 
     def save_model(self):
         '''This will save the models and weights'''
@@ -108,13 +113,29 @@ class WaldoCNN(object):
 
     def score_model(self):
         '''This will score the model and return the values'''
-        self.score = model.evaluate(X_test, Y_test, verbose=0)
+
+        self.score = self.model.evaluate(self.validation_generator, verbose=0)
         print('Test score:', self.score[0])
         print('Test accuracy:', self.score[1])
 
+    def save_question(self):
+        ''' This will ask to save model and will save it prompted too'''
+
+        anslstY = ['yes', 'y']
+        anslstN = ['no', 'n']
+        ans = input("Save model??? ")
+        if type(ans) != str:
+            print('Not valid ans, Please enter yes or no')
+            self.save_question()
+        else:
+            if ans.lower() in anslstY:
+                self.save_model()
+            else:
+                print('Model not saved.')
+
 
 if __name__ == '__main__':
-    waldo1 = WaldoCNN(50, 10, 'data/Keras Generated/Train',
-                      'data/Keras Generated/Test', 1)
-    waldo1.fit()
-
+    waldo = WaldoCNN(50, 10, 'data/Keras Generated/Train',
+                     'data/Keras Generated/Test', 1,)
+    waldo.fit()
+    waldo.hist
