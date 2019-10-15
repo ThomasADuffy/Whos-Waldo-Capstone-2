@@ -1,4 +1,9 @@
 from tensorflow.keras.preprocessing.image import ImageDataGenerator
+import sys
+import os
+SCRIPT_DIRECTORY = os.path.realpath(__file__)
+ROOT_DIRECTORY = os.path.split(SCRIPT_DIRECTORY)[0]
+sys.path.append(ROOT_DIRECTORY)
 
 
 class WaldoGenerator(object):
@@ -19,7 +24,7 @@ class WaldoGenerator(object):
                                             rescale=1./255,
                                             shear_range=0,
                                             zoom_range=0.2,
-                                            brightness_range=(.7,1.3),
+                                            brightness_range=(.7, 1.3),
                                             horizontal_flip=True,
                                             vertical_flip=False,
                                             fill_mode='nearest')
@@ -29,7 +34,7 @@ class WaldoGenerator(object):
         in the create_img_generator function to actually save the images'''
 
         print(f'Loading pictures from {self.import_path_name}')
-        i=0
+        i = 0
         for batch in self.datagen.flow_from_directory(
                                         directory=self.import_path_name,
                                         save_to_dir=self.export_path_name,
@@ -50,8 +55,14 @@ class WaldoGenerator(object):
         self.create_pictures()
 
 
-WaldoGenerator('data/Keras Generated/Train',
-                'data/Keras Generated/Train/waldo/generated', 3950)
+if __name__ == '__main__':
 
-WaldoGenerator('data/Keras Generated/Test',
-                'data/Keras Generated/Test/waldo/generated', 987)
+    WaldoGenerator(os.path.join(ROOT_DIRECTORY, 'data/Keras Generated/Train'),
+                   os.path.join(ROOT_DIRECTORY,
+                                'data/Keras Generated/Train/waldo/generated'),
+                   3950)
+
+    WaldoGenerator(os.path.join(ROOT_DIRECTORY, 'data/Keras Generated/Test'),
+                   os.path.join(ROOT_DIRECTORY,
+                                'data/Keras Generated/Test/waldo/generated'),
+                   987)

@@ -12,8 +12,6 @@ from tensorflow import keras
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense, Dropout, Activation, Flatten
 from tensorflow.keras.layers import Conv2D, MaxPooling2D
-from tensorflow.keras.datasets import mnist
-from tensorflow.keras.utils import to_categorical
 
 def load_and_featurize_data():
     # the data, shuffled and split between train and test sets
@@ -82,7 +80,7 @@ def define_model(nb_filters, kernel_size, input_shape, pool_size):
 if __name__ == '__main__':
     # important inputs to the model: don't changes the ones marked KEEP 
     batch_size = 150  # number of training samples used at a time to update the weights
-    nb_classes = 10   # number of output possibilites: [0 - 9] KEEP
+    nb_classes = 2   # number of output possibilites: [0 - 9] KEEP
     nb_epoch = 10     # number of passes through the entire train dataset before weights "final"
     img_rows, img_cols = 64, 64  # the size of the MNIST images KEEP
     input_shape = (img_rows, img_cols, 3)  # 1 channel image input (grayscale) KEEP
