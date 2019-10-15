@@ -8,6 +8,7 @@ from skimage import io, transform, color
 from tensorflow.keras.utils import to_categorical
 import os
 import sys
+import csv
 
 SCRIPT_DIRECTORY = os.path.realpath(__file__)
 ROOT_DIRECTORY = os.path.split(os.path.split(SCRIPT_DIRECTORY)[0])[0]
@@ -26,11 +27,12 @@ class WaldoCNN():
         load_model"""
 
     def __init__(self, batchsize, epochs, train_data_loc,
-                 test_data_loc, version, load_model=False):
+                 test_data_loc, version, holdout_data_loc, load_model=False):
         self.batchsize = batchsize
         self.epochs = epochs
         self.train_data_loc = os.path.join(ROOT_DIRECTORY, train_data_loc)
         self.test_data_loc = os.path.join(ROOT_DIRECTORY, test_data_loc)
+        self.holdout_data_loc = os.path.join(ROOT_DIRECTORY, holdout_data_loc)
         self.version = version
         self.load_model = load_model
         self.create_dataset_generators()
@@ -41,6 +43,8 @@ class WaldoCNN():
 
         self.train_datagen = ImageDataGenerator(rescale=1./255)
         self.test_datagen = ImageDataGenerator(rescale=1./255)
+        self.holdout_datagen = ImageDataGenerator(rescale=1./255)
+
         self.train_generator = self.train_datagen.flow_from_directory(
                 self.train_data_loc,
                 batch_size=self.batchsize,
@@ -49,6 +53,12 @@ class WaldoCNN():
                 target_size=(64, 64))
         self.validation_generator = self.test_datagen.flow_from_directory(
                 self.test_data_loc,
+                batch_size=self.batchsize,
+                class_mode='binary',
+                color_mode='rgb',
+                target_size=(64, 64))
+        self.holdout_generator = self.holdout_datagen.flow_from_directory(
+                self.holdout_data_loc,
                 batch_size=self.batchsize,
                 class_mode='binary',
                 color_mode='rgb',
@@ -101,20 +111,32 @@ class WaldoCNN():
                                              use_multiprocessing=False,
                                              shuffle=True, initial_epoch=0)
         self.score_model()
+        self.metrics = self.hist.history
         self.save_question()
-        # self.metrics = WaldoMetrics(self.model)
 
     def save_model(self):
-        '''This will save the models and weights'''
+        '''This will save the models and weights to the Model directory'''
 
         self.model.save(os.path.join(MODEL_DIRECTORY,
                                      f'model_v{self.version}.h5'))
-        print("Saved model to disk")
+        with open(os.path.join(MODEL_DIRECTORY,
+                               f'model_v{self.version}_metrics.csv'),
+                  'w') as f:
+            w = csv.DictWriter(f, self.metrics.keys())
+            w.writeheader()
+            for i in range(0, len(list(self.metrics.values())[0])):
+                w.writerow({list(self.metrics.keys())[0]: list(self.metrics.values())[0][i],
+                           list(self.metrics.keys())[1]: list(self.metrics.values())[1][i],
+                           list(self.metrics.keys())[2]: list(self.metrics.values())[2][i],
+                           list(self.metrics.keys())[3]: list(self.metrics.values())[3][i]})
+        print("Saved model and metrics to disk")
 
     def score_model(self):
-        '''This will score the model and return the values'''
+        '''This will score the model on a small hold out set
+        and return the values'''
 
-        self.score = self.model.evaluate(self.validation_generator, verbose=0)
+        self.score = self.model.evaluate(self.holdout_generator, verbose=0)
+        print('Tested on holdout set:')
         print('Test score:', self.score[0])
         print('Test accuracy:', self.score[1])
 
@@ -136,6 +158,6 @@ class WaldoCNN():
 
 if __name__ == '__main__':
     waldo = WaldoCNN(50, 10, 'data/Keras Generated/Train',
-                     'data/Keras Generated/Test', 1,)
+                     'data/Keras Generated/Test', 1,
+                     'data/Keras Generated/Holdout')
     waldo.fit()
-    waldo.hist
