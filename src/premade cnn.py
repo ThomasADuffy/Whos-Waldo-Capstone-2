@@ -84,11 +84,11 @@ if __name__ == '__main__':
     batch_size = 150  # number of training samples used at a time to update the weights
     nb_classes = 10   # number of output possibilites: [0 - 9] KEEP
     nb_epoch = 10     # number of passes through the entire train dataset before weights "final"
-    img_rows, img_cols = 28, 28  # the size of the MNIST images KEEP
-    input_shape = (img_rows, img_cols, 1)  # 1 channel image input (grayscale) KEEP
-    nb_filters = 15  # number of convolutional filters to use
+    img_rows, img_cols = 64, 64  # the size of the MNIST images KEEP
+    input_shape = (img_rows, img_cols, 3)  # 1 channel image input (grayscale) KEEP
+    nb_filters = 10  # number of convolutional filters to use
     pool_size = (2, 2) # pooling decreases image size, reduces computation, adds translational invariance
-    kernel_size = (2, 2) # convolutional kernel size, slides over image to learn features
+    kernel_size = (4, 4) # convolutional kernel size, slides over image to learn features
 
     X_train, X_test, Y_train, Y_test = load_and_featurize_data()
 
