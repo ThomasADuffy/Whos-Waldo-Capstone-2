@@ -164,9 +164,6 @@ class WaldoCNN():
             else:
                 print('Model not saved.')
 
-    def save_model_predictions(self):
-        pass
-
 
 if __name__ == '__main__':
     waldo = WaldoCNN(50, 10, 'data/Keras Generated/Train',
@@ -175,5 +172,4 @@ if __name__ == '__main__':
                      load_model=os.path.join(MODEL_DIRECTORY,
                                              'model_v2.h5'))
 
-    # waldo.fit()
-    # plot_model(waldo, to_file='model.png')
+    waldo.fit()

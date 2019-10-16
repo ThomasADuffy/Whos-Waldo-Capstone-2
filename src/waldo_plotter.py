@@ -2,6 +2,8 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 import matplotlib
+from tensorflow.keras.utils import plot_model
+from waldo_CNN import *
 
 plt.style.use('ggplot')
 
@@ -20,11 +22,11 @@ class WaldoPlotter():
     score_accuracy - accuracy metric created by holdout set
     verson - verson of the model'''
 
-    def __init__(self, df, score, version):
+    def __init__(self, df, waldo, score):
         self.df = df
         self.score_loss = score[0]
         self.score_accuracy = score[1]
-        self.version = version
+        self.waldo = waldo
 
     def create_accuracy_loss(self, figloc):
         fig, ax = plt.subplots(1, 2, figsize=(12, 9))
@@ -41,8 +43,19 @@ class WaldoPlotter():
         ax[1].set_ylabel('Loss')
         ax[1].set_xlabel('Epoch')
         ax[1].legend(['Train', 'Test'], loc='upper left')
-        a = round(self.score_accuracy, 3)
-        ls = round(self.score_loss, 3)
-        fig.suptitle(f'Model V{self.version} Loss:{ls} Acc:{a} (on holdout)',
+        a = self.score_accuracy
+        ls = self.score_los
+        fig.suptitle(f'Model V{self.waldo.version} Loss:{ls} Acc:{a} (on holdout)',
                      fontsize=18)
         plt.savefig(figloc)
+
+    def plot_model_structure(self, savedir):
+        return plot_model(self.waldo.model, to_file=savedir,
+                          show_shapes=True, expand_nested=True)
+
+    def plot_wrong_imgs(self, savedir):
+        pass
+
+
+if __name__ == '__main__':
+    pass
