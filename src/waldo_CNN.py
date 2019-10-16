@@ -5,7 +5,7 @@ from tensorflow.keras.layers import Conv2D, MaxPooling2D
 from tensorflow.keras.layers import Activation, Dropout, Flatten, Dense
 from tensorflow.keras.models import load_model
 from skimage import io, transform, color
-from tensorflow.keras.utils import to_categorical
+from tensorflow.keras.utils import to_categorical, plot_model
 import os
 import sys
 import csv
@@ -27,7 +27,7 @@ class WaldoCNN():
         load_model"""
 
     def __init__(self, batchsize, epochs, train_data_loc,
-                 test_data_loc, version, holdout_data_loc, load_model=False):
+                 test_data_loc, holdout_data_loc, version, load_model=False):
         self.batchsize = batchsize
         self.epochs = epochs
         self.train_data_loc = os.path.join(ROOT_DIRECTORY, train_data_loc)
@@ -71,25 +71,33 @@ class WaldoCNN():
                                                  self.load_model))
         else:
             self.model = Sequential()
-            self.model.add(Conv2D(32, (3, 3), input_shape=(64, 64, 3),
-                           padding='valid'))
-            self.model.add(Activation('relu'))
-            self.model.add(MaxPooling2D(pool_size=(2, 2)))
+            self.model.add(Conv2D(64, (4, 4), input_shape=(64, 64, 3),
+                                  padding='valid',
+                                  name='Convolution-1',
+                                  activation='relu'))
+            self.model.add(Conv2D(32, (4, 4), padding='valid',
+                                  name='Convolution-2',
+                                  activation='relu'))
+            self.model.add(MaxPooling2D(pool_size=(4, 4),
+                                        name='Pooling-1'))
 
-            self.model.add(Conv2D(32, (3, 3), padding='valid'))
-            self.model.add(Activation('relu'))
-            self.model.add(MaxPooling2D(pool_size=(2, 2)))
-
-            self.model.add(Conv2D(64, (3, 3), padding='valid'))
-            self.model.add(Activation('relu'))
-            self.model.add(MaxPooling2D(pool_size=(2, 2)))
+            self.model.add(Conv2D(32, (2, 2), padding='valid',
+                                  name='Convolution-3',
+                                  activation='relu'))
+            self.model.add(Conv2D(64, (2, 2), padding='valid',
+                                  name='Convolution-4',
+                                  activation='relu'))
+            self.model.add(MaxPooling2D(pool_size=(2, 2),
+                                        name='Pooling-2'))
 
             self.model.add(Flatten())
-            self.model.add(Dense(64))
-            self.model.add(Activation('relu'))
-            self.model.add(Dropout(0.5))
-            self.model.add(Dense(1))
-            self.model.add(Activation('sigmoid'))
+            self.model.add(Dense(64,
+                                 name='Dense-1',
+                                 activation='relu'))
+            self.model.add(Dropout(0.25))
+            self.model.add(Dense(1,
+                                 name='Dense-2',
+                                 activation='sigmoid'))
 
             self.model.compile(loss='binary_crossentropy',
                                optimizer='adam',
@@ -158,6 +166,8 @@ class WaldoCNN():
 
 if __name__ == '__main__':
     waldo = WaldoCNN(50, 10, 'data/Keras Generated/Train',
-                     'data/Keras Generated/Test', 1,
-                     'data/Keras Generated/Holdout')
+                     'data/Keras Generated/Test',
+                     'data/Keras Generated/Holdout', 2
+                     )
     waldo.fit()
+    # plot_model(waldo, to_file='model.png')
