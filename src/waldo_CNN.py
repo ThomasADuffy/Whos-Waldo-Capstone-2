@@ -6,6 +6,7 @@ from tensorflow.keras.layers import Activation, Dropout, Flatten, Dense
 from tensorflow.keras.models import load_model
 from skimage import io, transform, color
 from tensorflow.keras.utils import to_categorical, plot_model
+from tensorflow.keras.metrics import Precision, Recall
 import os
 import sys
 import csv
@@ -101,7 +102,7 @@ class WaldoCNN():
 
             self.model.compile(loss='binary_crossentropy',
                                optimizer='adam',
-                               metrics=['accuracy'])
+                               metrics=['accuracy', Precision(), Recall()])
 
     def fit(self):
         ''' This will fit the model with the data inputed'''
@@ -163,11 +164,16 @@ class WaldoCNN():
             else:
                 print('Model not saved.')
 
+    def save_model_predictions(self):
+        pass
+
 
 if __name__ == '__main__':
     waldo = WaldoCNN(50, 10, 'data/Keras Generated/Train',
                      'data/Keras Generated/Test',
-                     'data/Keras Generated/Holdout', 2
-                     )
-    waldo.fit()
+                     'data/Keras Generated/Holdout', 3,
+                     load_model=os.path.join(MODEL_DIRECTORY,
+                                             'model_v2.h5'))
+
+    # waldo.fit()
     # plot_model(waldo, to_file='model.png')
