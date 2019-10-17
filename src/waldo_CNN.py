@@ -7,12 +7,9 @@ from tensorflow.keras.models import load_model
 from skimage import io, transform, color
 from tensorflow.keras.utils import to_categorical, plot_model
 from tensorflow.keras.metrics import Precision, Recall
-import tensorflow as tf
 import os
 import sys
 import csv
-
-
 
 SCRIPT_DIRECTORY = os.path.realpath(__file__)
 ROOT_DIRECTORY = os.path.split(os.path.split(SCRIPT_DIRECTORY)[0])[0]
@@ -70,6 +67,7 @@ class WaldoCNN():
 
     def create_model(self):
         '''This will create the hard encoded model'''
+
         if self.load_model:
             self.model = load_model(os.path.join(MODEL_DIRECTORY,
                                                  self.load_model))
