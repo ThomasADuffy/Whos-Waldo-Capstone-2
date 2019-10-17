@@ -2,6 +2,7 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 import matplotlib
+from skimage import io, color, filters
 from tensorflow.keras.utils import plot_model
 from waldo_CNN import *
 
@@ -30,7 +31,7 @@ class WaldoPlotter():
 
     def create_accuracy_loss(self, figloc):
         '''This will plot the accuracy and loss plots for the model'''
-        
+
         fig, ax = plt.subplots(1, 2, figsize=(12, 9))
         ax[0].plot(self.df['accuracy'], lw=3, marker='.')
         ax[0].plot(self.df['val_accuracy'], lw=3, marker='.')
@@ -57,19 +58,25 @@ class WaldoPlotter():
         return plot_model(self.waldo.model, to_file=savedir,
                           show_shapes=True, expand_nested=True)
 
-    def plot_wrong_imgs(self, savedir):
-        batch_x, batch_y = waldo1.holdout_generator.next()
-        predict_array = (np.where(waldo2.model.predict_generator(waldo1.holdout_generator)>=.5,1,0)).reshape(1,-1)
-        y_true = batch_y.reshape(1,-1)
-        idx_arr = np.where(predict_array!=y_true)[:1]
-        fig,ax = plt.subplots(1,2,figsize=(5,5))
-        image = batch_x[idx]
-        plt.imshow(image)
-        plt.show()
-        print(idx)
-        print(waldo2.model.predict_generator(waldo2.holdout_generator)[idx])
-        print(np.where(predict_array!=y_true))
-        (np.where(self.waldo.model.predict_generator(self.waldo.holdout_generator)>=.5,1,0)).reshape(1,-1)
+    def save_wrong_imgs(self, savedir):
+        hold_x, hold_y = self.waldo.holdout_generator[0]
+        valid_x, valid_y = self.waldo.holdout_generator[0]
+        predict_array_hold = (np.where(self.waldo.model.predict(hold_x) >= .5, 1, 0)).reshape(1, -1)
+        predict_array_valid = (np.where(self.waldo.model.predict(valid_x) >= .5, 1, 0)).reshape(1, -1)
+        y_true_hold = hold_y.reshape(1, -1)
+        y_true_valid = valid_y.reshape(1, -1)
+        idx_lst_hold = list(np.where(predict_array_hold != y_true_hold)[1])
+        idx_lst_valid = list(np.where(predict_array_valid != y_true_valid)[1])
+        for i, idx in enumerate(idx_lst_hold):
+            io.imsave(fname=os.join.path(savedir, f'Model_V{self.waldo.version}_hold{i+1}.jpg', arr=hold_x[idx]))
+        for i, idx in enumerate(idx_lst_valid):
+            io.imsave(fname=os.join.path(savedir, f'Model_V{self.waldo.version}_valid{i+1}.jpg', arr=hold_x[idx]))
+        self.wronginfo_hold = {'idxlst': idx_lst_hold,
+                               'problst': self.waldo.model.predict(hold_x)[idx_lst_hold],
+                               'imglst': hold_x[idx_lst_hold]}
+        self.wronginfo_valid = {'idxlst': idx_lst_valid,
+                                'problst': self.waldo.model.predict(valid_x)[idx_lst_valid],
+                                'imglst': hold_x[idx_lst_valid]}
 
 
 if __name__ == '__main__':

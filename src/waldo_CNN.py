@@ -7,9 +7,12 @@ from tensorflow.keras.models import load_model
 from skimage import io, transform, color
 from tensorflow.keras.utils import to_categorical, plot_model
 from tensorflow.keras.metrics import Precision, Recall
+import tensorflow as tf
 import os
 import sys
 import csv
+
+
 
 SCRIPT_DIRECTORY = os.path.realpath(__file__)
 ROOT_DIRECTORY = os.path.split(os.path.split(SCRIPT_DIRECTORY)[0])[0]
@@ -168,8 +171,6 @@ class WaldoCNN():
 if __name__ == '__main__':
     waldo = WaldoCNN(50, 10, 'data/Keras Generated/Train',
                      'data/Keras Generated/Test',
-                     'data/Keras Generated/Holdout', 3,
-                     load_model=os.path.join(MODEL_DIRECTORY,
-                                             'model_v2.h5'))
+                     'data/Keras Generated/Holdout', 3)
 
     waldo.fit()
