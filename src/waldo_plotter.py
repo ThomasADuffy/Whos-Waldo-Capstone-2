@@ -93,9 +93,9 @@ class WaldoPlotter():
         for i, idx in enumerate(idx_lst_hold):
             y_p = predict_array_hold[:, idx]
             y_t = y_true_hold[:, idx]
-            metric = self.metric_finder(y_p[0],y_t[0])
+            metric = self.metric_finder(y_p[0], y_t[0])
             prob = self.wronginfo_hold['problst'][i]
-            fig, ax = plt.subplots(1, 1, figsize=(5, 5))
+            fig, ax = plt.subplots(1, 1, figsize=(6, 6))
             ax.imshow(X=hold_x[idx])
             ax.set_title(f"Probabillity={prob} Predict={y_p} Actual={y_t} | {metric}")
             plt.savefig(os.path.join(savedir, f'Model_V{self.waldo.version}_hold{i}.jpg'))
@@ -104,9 +104,9 @@ class WaldoPlotter():
         for i, idx in enumerate(idx_lst_valid):
             y_p = predict_array_valid[:, idx]
             y_t = y_true_valid[:, idx]
-            metric = self.metric_finder(y_p[0],y_t[0])
+            metric = self.metric_finder(y_p[0], y_t[0])
             prob = self.wronginfo_valid['problst'][i]
-            fig, ax = plt.subplots(1, 1, figsize=(5, 5))
+            fig, ax = plt.subplots(1, 1, figsize=(6, 6))
             ax.imshow(X=valid_x[idx])
             ax.set_title(f"Probabillity={prob} Predict={y_p} Actual={y_t} | {metric}")
             plt.savefig(os.path.join(savedir, f'Model_V{self.waldo.version}_valid{i}.jpg'))
