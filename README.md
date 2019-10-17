@@ -23,7 +23,9 @@ The first step of this project was to find data. Now my data would be two classi
 
 [githubwaldo_structure]:/images/misc_imgs/githubwaldo_structure.jpg
 I chose to go with RGB photos because color is a distinctive feature surrounding waldo. Especially when it comes to his iconic red and white t-shirt and hat, in addition his skin color is something that is distinct also.The next choice I made after experimenting with the data was choosing the dimension size. I ended up going with the 64x64 images due to the sheer number of images and also because I wanted to focus my training on waldos face which is a relatively small portion of a page. After looking into the pictures I realized that this dataset was not the best it had a huge class imbalance regardless of the dimensions and when I looked into the pictures classified as waldo, over half of them were not waldo and something very arbitrary as seen below.  
-![Bad Waldo1](/images/misc_imgs/badwaldo_1.jpg) ![Bad Waldo2](/images/misc_imgs/badwaldo_2.jpg) ![Bad Waldo3](/images/misc_imgs/badwaldo_3.jpg)
+![Bad Waldo1](/images/misc_imgs/badwaldo_1.jpg) ![Bad Waldo2](/images/misc_imgs/badwaldo_2.jpg) ![Bad Waldo3](/images/misc_imgs/badwaldo_3.jpg)  
+Therefor, I had to physically play Where's Waldo? for hours on end to get a good data set, from where I cropped the images to be 64x64(I did this from these two image galleries [here](https://imgur.com/gallery/8exqx) and [here](https://www.deviantart.com/where-is-waldo-wally/gallery/all)). I ended up with 58 total photos of just waldos face, a few examples are below.  
+ ![Good Waldo1](/images/misc_imgs/goodwaldo_1.jpg) ![Good Waldo2](/images/misc_imgs/goodwaldo_2.jpg) ![Good Waldo3](/images/misc_imgs/goodwaldo_3.jpg) ![Good Waldo4](/images/misc_imgs/goodwaldo_4.jpg)
 <!-- <img src="https://github.com/ThomasADuffy/Crypto-Capstone-1/blob/master/imgs/ETH_logo.png" height="256">
 
 ><span style=font-size:1.1em;>Is the correlation between the count of tweets per day and price of each coin?</span>  
