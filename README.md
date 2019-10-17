@@ -7,24 +7,17 @@
 
 # **Table of Contents** <!-- omit in toc -->
 - [**Introduction**](#introduction)
-- [**What's the data?**](#whats-the-data)
-- [**Initial Question and Assumptions**](#initial-question-and-assumptions)
-- [**EDA and Cleaning of Data**](#eda-and-cleaning-of-data)
-- [**Visualization**](#visualization)
-- [**Analysis and Conclusion**](#analysis-and-conclusion)
-- [**Moving Forward**](#moving-forward)
-- [**Photo and Data Credits/Sources**](#photo-and-data-creditssources)
-  - [Picture sources](#picture-sources)
+- [**Readme Images and Data Credits/Sources**](#readme-images-and-data-creditssources)
+  - [Readme Images sources](#readme-images-sources)
   - [Datasets sources](#datasets-sources)
 
+# **Introduction**
+Ever since I was a kid, I was terrible at where’s waldo . It has been a bugging issue until today where I can conquer over Waldo with machine learning and convoluted neural networks. On a more serious note, everybody has heard of or has played Where’s Waldo?(also known as Wheres Wally?). Being very intrested in Neural Networks and the 
 <img src="https://github.com/ThomasADuffy/Crypto-Capstone-1/blob/master/imgs/ETH_logo.png" height="256">
 
 ><span style=font-size:1.1em;>Is the correlation between the count of tweets per day and price of each coin?</span>  
 > And if there is a correlation, is this a negative or positive correlation?
 
-![ETH Scatter plot][ETH_scatter_plot]
-
-[ETH_scatter_plot]:https://github.com/ThomasADuffy/Crypto-Capstone-1/blob/master/graphs/ETH_scatter_plot.png
 
 # **Readme Images and Data Credits/Sources**
 ## Readme Images sources
