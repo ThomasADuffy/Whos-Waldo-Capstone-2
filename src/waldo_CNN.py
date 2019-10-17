@@ -138,7 +138,10 @@ class WaldoCNN():
                 w.writerow({list(self.metrics.keys())[0]: list(self.metrics.values())[0][i],
                            list(self.metrics.keys())[1]: list(self.metrics.values())[1][i],
                            list(self.metrics.keys())[2]: list(self.metrics.values())[2][i],
-                           list(self.metrics.keys())[3]: list(self.metrics.values())[3][i]})
+                           list(self.metrics.keys())[4]: list(self.metrics.values())[4][i],
+                           list(self.metrics.keys())[5]: list(self.metrics.values())[5][i],
+                           list(self.metrics.keys())[6]: list(self.metrics.values())[6][i],
+                           list(self.metrics.keys())[7]: list(self.metrics.values())[7][i]})
         print("Saved model and metrics to disk")
 
     def score_model(self):
