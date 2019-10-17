@@ -68,9 +68,9 @@ class WaldoPlotter():
         idx_lst_hold = list(np.where(predict_array_hold != y_true_hold)[1])
         idx_lst_valid = list(np.where(predict_array_valid != y_true_valid)[1])
         for i, idx in enumerate(idx_lst_hold):
-            io.imsave(fname=os.join.path(savedir, f'Model_V{self.waldo.version}_hold{i+1}.jpg', arr=hold_x[idx]))
+            io.imsave(fname=os.join.path(savedir, f'Model_V{self.waldo.version}_hold{i}.jpg', arr=hold_x[idx]))
         for i, idx in enumerate(idx_lst_valid):
-            io.imsave(fname=os.join.path(savedir, f'Model_V{self.waldo.version}_valid{i+1}.jpg', arr=hold_x[idx]))
+            io.imsave(fname=os.join.path(savedir, f'Model_V{self.waldo.version}_valid{i}.jpg', arr=hold_x[idx]))
         self.wronginfo_hold = {'idxlst': idx_lst_hold,
                                'problst': self.waldo.model.predict(hold_x)[idx_lst_hold],
                                'imglst': hold_x[idx_lst_hold]}
