@@ -1,7 +1,9 @@
 # **Who actually is Waldo?** <!-- omit in toc -->
 ### Creating an Image Classification CNN to Predict if it is Waldo<!-- omit in toc -->  
 
-<img src="https://github.com/ThomasADuffy/Whos-Waldo-Capstone-2/tree/master/images/misc_imgs/Title_banner.jpg" width="1000">
+![Title pic][title_pic]
+
+[title_pic]:/images/misc_imgs/Title-Banner.jpg
 
 # **Table of Contents** <!-- omit in toc -->
 - [**Introduction**](#introduction)
