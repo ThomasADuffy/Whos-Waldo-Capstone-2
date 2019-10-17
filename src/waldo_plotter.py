@@ -95,9 +95,12 @@ class WaldoPlotter():
             y_t = y_true_hold[:, idx]
             metric = self.metric_finder(y_p[0], y_t[0])
             prob = self.wronginfo_hold['problst'][i]
-            fig, ax = plt.subplots(1, 1, figsize=(6, 6))
+            fig, ax = plt.subplots(1, 1, figsize=(6.25, 6.25))
             ax.imshow(X=hold_x[idx])
             ax.set_title(f"Probabillity={prob} Predict={y_p} Actual={y_t} | {metric}")
+            ax.set_xticks([])
+            ax.set_yticks([])
+            ax.grid(False)
             plt.savefig(os.path.join(savedir, f'Model_V{self.waldo.version}_hold{i}.jpg'))
             plt.close(fig)
 
@@ -106,9 +109,12 @@ class WaldoPlotter():
             y_t = y_true_valid[:, idx]
             metric = self.metric_finder(y_p[0], y_t[0])
             prob = self.wronginfo_valid['problst'][i]
-            fig, ax = plt.subplots(1, 1, figsize=(6, 6))
+            fig, ax = plt.subplots(1, 1, figsize=(6.25, 6.25))
             ax.imshow(X=valid_x[idx])
             ax.set_title(f"Probabillity={prob} Predict={y_p} Actual={y_t} | {metric}")
+            ax.set_xticks([])
+            ax.set_yticks([])
+            ax.grid(False)
             plt.savefig(os.path.join(savedir, f'Model_V{self.waldo.version}_valid{i}.jpg'))
             plt.close(fig)
 
