@@ -47,8 +47,10 @@ I started building a class which incorporated a CNN as one of the methods and at
 
 ## **The First Model **
 The First model is shown below:  
+<img src="https://github.com/ThomasADuffy/Crypto-Capstone-1/blob/master/imgs/ETH_logo.png" width="350">
+<img src="https://github.com/ThomasADuffy/Crypto-Capstone-1/blob/master/imgs/ETH_logo.png" width="350">
 ![test](/images/plots_structures/model_V1_FC.jpg)![test](/images/plots_structures/Model_v1.jpg)
-<!-- <img src="https://github.com/ThomasADuffy/Crypto-Capstone-1/blob/master/imgs/ETH_logo.png" height="256">
+
 
 ><span style=font-size:1.1em;>Is the correlation between the count of tweets per day and price of each coin?</span>  
 > And if there is a correlation, is this a negative or positive correlation? -->
