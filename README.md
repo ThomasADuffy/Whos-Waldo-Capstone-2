@@ -88,13 +88,28 @@ This model got the following images wrong:
 <img src="/images/model_wrong_images/model_v1_used/7.jpg" width="400"> <img src="/images/model_wrong_images/model_v1_used/8.jpg" width="400"> 
 <img src="/images/model_wrong_images/model_v1_used/9.jpg" width="400"> <img src="/images/model_wrong_images/model_v1_used/10.jpg" width="400"> 
 <img src="/images/model_wrong_images/model_v1_used/11.jpg" width="400"> <img src="/images/model_wrong_images/model_v1_used/12.jpg" width="400"> 
-<img src="/images/model_wrong_images/model_v1_used/13.jpg" width="400"> 
+<img src="/images/model_wrong_images/model_v1_used/13.jpg" width="400">  
+
+What I found is that it weighted very heavily on the red and white stripes as you can see the probability of that is almost 90%. It also seemed to weight his hair a good amount as you can see in the picture two where the random man is heavily predicted to be waldo I presumably due to his hair style.
 
 
 
 ## **Model 2 Results**
 For this model the Accuracy and Loss are shown below with the Accuracy and Loss for the holdout set listed also:  
 <img src="/images/plots_structures/model_V2_plot.jpg" align="middle">  
+
+| Epoch | Train Loss | Train Accuracy | Validation Loss | Validation Accuracy |
+| ------------- | ------------- | ------------- | ------------- | ------------- |
+| 1 |0.516547598176121|0.7285714|0.3929828932372535|0.8291108|
+| 2 |0.19555187956516787|0.92583853|0.25455281819875647|0.8976652|
+| 3 |0.13553661426170643|0.9525466|0.19776214295771063|0.92001987|
+| 4 |0.09371250481431528|0.9673292|0.2378858371933059|0.9150522|
+| 5 |0.07309411169081834|0.973913|0.197534224563619|0.9230005|
+| 6 |0.04128889629533457|0.98583853|0.14577555697320438|0.9493294|
+| 7 |0.03518686805214004|0.9879503|0.3612544197225716|0.9135618|
+| 8 |0.02434018259558549|0.99155277|0.09945626059410775|0.9642325|
+| 9 |0.032404230222082844|0.9888199|0.3032174304741003|0.92896175|
+| 10 |0.015606344389542648|0.99391305|0.28480060130539464|0.9299553|
 This model performed the best as it 90.5 percent accurate on the hold out set with a loss of .583. As you can see the at around epoch 3 it starts to experience diminishing returns with the accuracy and around 6 it really starts to flatten off.
 
 # **Readme Images and Data Credits/Sources**
