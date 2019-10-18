@@ -13,6 +13,9 @@
   - [**The First Model**](#the-first-model)
   - [**The Second Model**](#the-second-model)
 - [**The Results**](#the-results)
+  - [**Model 1 Results**](#model-1-results)
+    - [Images it Got Wrong](#images-it-got-wrong)
+  - [**Model 2 Results**](#model-2-results)
 - [**Readme Images and Data Credits/Sources**](#readme-images-and-data-creditssources)
   - [Readme Images sources](#readme-images-sources)
   - [Datasets sources](#datasets-sources)
@@ -48,7 +51,7 @@ you can check out the code [here](https://github.com/ThomasADuffy/Whos-Waldo-Cap
 I started building a class which incorporated a CNN as one of the methods and attribute so I could pull various metrics and also load a previous model and utilize the class still if I needed. It also allowed me to save the model seamlessly and also save the metrics as a csv so I can plot with them much easier. To take a look at my class click [here](https://github.com/ThomasADuffy/Whos-Waldo-Capstone-2/blob/master/src/waldo_CNN.py). I created the CNN using Keras's sequential model and tried two different models. While editing all the hyperparameters. What I found was that the relu activation function was the best for my problem and every other activation function I tried would consistently give me below 70% accuracy. In addition I also tweaked the number of epochs and  batch size which didn't prove too useful as I will show how the epochs top out pretty early and the batch size really only helped around 50.  I also edited the layers and structure of my model quite a bit. The two models I found performed the best are shown below.
 
 ## **The First Model**
-<img src="/images/plots_structures/Model_v1.jpg"align="middle">  
+<img src="/images/plots_structures/Model_v1.jpg" align="middle">  
 <img src="/images/plots_structures/Model_1.jpg" align="middle">
 
 ## **The Second Model**
@@ -56,6 +59,47 @@ I started building a class which incorporated a CNN as one of the methods and at
 <img src="/images/plots_structures/Model_2.jpg" align="middle">
 
 # **The Results**
+To further test my model I also created a holdout set after the validation dataset, this consisted of 21 pictures(15 non-waldo and 6 waldo) so that I could test my data on data that there would have been absolutely no way it could have seen. After running these models I plotted their Accuracy and loss per epoch ran and also found which images they predicted wrong in the validation and holdout sets with the associated probability and weather it was a false negative or false positive. I did this all utilizing a plotting class I created so I could pull all of these metrics and plot them while also finding and creating the wrong images. To see the class please click [here](https://github.com/ThomasADuffy/Whos-Waldo-Capstone-2/blob/master/src/waldo_plotter.py).
+
+## **Model 1 Results**
+For this model the Accuracy and Loss are shown below with the Accuracy and Loss for the holdout set listed also:  
+<img src="/images/plots_structures/model_V1_plot.jpg" align="middle">  
+| Epoch | Train Loss  | Train Accuracy | Validation Loss  | Validation Accuracy |
+| ------------- | ------------- | ------------- | ------------- | ------------- |
+| 1 |0.5074543081085134|0.73602486|0.5862582064256435|0.7600596|
+| 2 |0.25271103464020706|0.9074534|0.29761620138476536|0.8787879|
+| 3 |0.1606399196645488|0.9444721|0.49845979290037623|0.8574267|
+| 4 |0.12483842320370007|0.9570186|0.39829684757604833|0.89120716|
+| 5 |0.08248025323524609|0.9725466|0.31629875102421134|0.9100844|
+| 6 |0.0793775734347031|0.9736646|0.34167671900969454|0.92051667|
+| 7 |0.05759186621014931|0.98012424|0.43360949334938353|0.90710384|
+| 8 |0.050201601259155855|0.98459625|0.665299508033502|0.8976652|
+| 9 |0.03508698296522062|0.9885714|0.50010472762671|0.8971684|
+| 10 |0.029408993819144247|0.9898137|0.7619776308036795|0.9041232|
+This model performed actually very well as it 90.5 percent accurate on the hold out set with a loss of .583. On the validation data it hovered around 90 percent accuracy and a loss of .7 toward the end but before it was lower so maybe choosing the model at epoch 6 would have been best. As you can see the at around epoch 3 it starts to experience diminishing returns with the accuracy and around 6 it really starts to flatten off. 
+
+### Images it Got Wrong
+This model got the following images wrong:  
+<img src="/images/model_wrong_images/model_v1_used/1.jpg" align="middle"> 
+<img src="/images/model_wrong_images/model_v1_used/2.jpg" align="middle"> 
+<img src="/images/model_wrong_images/model_v1_used/3.jpg" align="middle"> 
+<img src="/images/model_wrong_images/model_v1_used/4.jpg" align="middle"> 
+<img src="/images/model_wrong_images/model_v1_used/5.jpg" align="middle"> 
+<img src="/images/model_wrong_images/model_v1_used/6.jpg" align="middle"> 
+<img src="/images/model_wrong_images/model_v1_used/7.jpg" align="middle"> 
+<img src="/images/model_wrong_images/model_v1_used/8.jpg" align="middle"> 
+<img src="/images/model_wrong_images/model_v1_used/9.jpg" align="middle"> 
+<img src="/images/model_wrong_images/model_v1_used/10.jpg" align="middle"> 
+<img src="/images/model_wrong_images/model_v1_used/11.jpg" align="middle"> 
+<img src="/images/model_wrong_images/model_v1_used/12.jpg" align="middle"> 
+<img src="/images/model_wrong_images/model_v1_used/13.jpg" align="middle"> 
+
+
+
+## **Model 2 Results**
+For this model the Accuracy and Loss are shown below with the Accuracy and Loss for the holdout set listed also:  
+<img src="/images/plots_structures/model_V2_plot.jpg" align="middle">  
+This model performed the best as it 90.5 percent accurate on the hold out set with a loss of .583. As you can see the at around epoch 3 it starts to experience diminishing returns with the accuracy and around 6 it really starts to flatten off.
 
 # **Readme Images and Data Credits/Sources**
 ## Readme Images sources
