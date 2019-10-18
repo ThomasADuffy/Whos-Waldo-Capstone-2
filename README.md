@@ -64,7 +64,8 @@ To further test my model I also created a holdout set after the validation datas
 ## **Model 1 Results**
 For this model the Accuracy and Loss are shown below with the Accuracy and Loss for the holdout set listed also:  
 <img src="/images/plots_structures/model_V1_plot.jpg" align="middle">  
-| Epoch | Train Loss  | Train Accuracy | Validation Loss  | Validation Accuracy |
+
+| Epoch | Train Loss | Train Accuracy | Validation Loss | Validation Accuracy |
 | ------------- | ------------- | ------------- | ------------- | ------------- |
 | 1 |0.5074543081085134|0.73602486|0.5862582064256435|0.7600596|
 | 2 |0.25271103464020706|0.9074534|0.29761620138476536|0.8787879|
@@ -76,6 +77,7 @@ For this model the Accuracy and Loss are shown below with the Accuracy and Loss 
 | 8 |0.050201601259155855|0.98459625|0.665299508033502|0.8976652|
 | 9 |0.03508698296522062|0.9885714|0.50010472762671|0.8971684|
 | 10 |0.029408993819144247|0.9898137|0.7619776308036795|0.9041232|
+
 This model performed actually very well as it 90.5 percent accurate on the hold out set with a loss of .583. On the validation data it hovered around 90 percent accuracy and a loss of .7 toward the end but before it was lower so maybe choosing the model at epoch 6 would have been best. As you can see the at around epoch 3 it starts to experience diminishing returns with the accuracy and around 6 it really starts to flatten off. 
 
 ### Images it Got Wrong
