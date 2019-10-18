@@ -33,17 +33,37 @@ The first step of this project was to find data. Now my data would be two classi
 
 [githubwaldo_structure]:/images/misc_imgs/githubwaldo_structure.jpg
 I chose to go with RGB photos because color is a distinctive feature surrounding waldo. Especially when it comes to his iconic red and white t-shirt and hat, in addition his skin color is something that is distinct also.The next choice I made after experimenting with the data was choosing the dimension size. I ended up going with the 64x64 images due to the sheer number of images and also because I wanted to focus my training on waldos face which is a relatively small portion of a page. After looking into the pictures I realized that this dataset was not the best it had a huge class imbalance regardless of the dimensions and when I looked into the pictures classified as waldo, over half of them were not waldo and something very arbitrary as seen below.  
+
+<p align="center"> 
+
 ![Bad Waldo1](/images/misc_imgs/badwaldo_1.jpg) ![Bad Waldo2](/images/misc_imgs/badwaldo_2.jpg) ![Bad Waldo3](/images/misc_imgs/badwaldo_3.jpg)  
+
+</p>
+
 Therefor, I had to physically play Where's Waldo? for hours to get a good data set, from where I cropped the images to be 64x64(I did this from these two image galleries [here](https://imgur.com/gallery/8exqx) and [here](https://www.deviantart.com/where-is-waldo-wally/gallery/all)). I ended up with 58 total photos of just waldos face, a few examples are below.  
+
+<p align="center"> 
+
  ![Good Waldo1](/images/misc_imgs/goodwaldo_1.jpg) ![Good Waldo2](/images/misc_imgs/goodwaldo_2.jpg) ![Good Waldo3](/images/misc_imgs/goodwaldo_3.jpg) ![Good Waldo4](/images/misc_imgs/goodwaldo_4.jpg)
 
+ </p>
+
  I still had a major class imbalance, I had 5337 non-waldo pictures and only 58 waldo pictures. Therefor I utilized Tensorflow's Keras ImageDataGenerator to generate more images of waldo which were augmented. One key factor was figuring about the hyperparameters of this image generator. As you can see from above in all the images, his head is always visible and also he is always upright with very little rotation, but he can face either left or right. Within my EDA notebook located [here](https://github.com/ThomasADuffy/Whos-Waldo-Capstone-2/blob/master/notebooks/EDA_ImgGeneration.ipynb) I tested out the images to see what they looked like before and after augmentation so that I knew my parameters were right. After much trial and error I found good parameters and ended up with the ImageGenerator as below:  
+
+<p align="center"> 
+
  ![Img Gen](/images/misc_imgs/imagegenerator_code.jpg)  
+
+ </p>
+
+<p align="center"> 
 
 | **Before** | **After** |
 | ------------- | ------------- |
 | ![waldob1](/images/misc_imgs/waldobefore1.jpg) | ![waldoa1](/images/misc_imgs/waldoafter1.jpg) |
 | ![waldob2](/images/misc_imgs/waldobefore2.jpg) | ![waldoa2](/images/misc_imgs/waldoafter2.jpg) |  
+
+</p>
 
  As you can see I only really shifted him around and changed brightness and zoom with horizontal flipping. In order to prevent data leakage, I split my images into subsets of test and train before generating more images, 10 test and 48 train. Then I did the augmentation on them which I created enough to total the number of non-waldo pictures so I wouldnt have a class imbalance. This ended up being 3952 training pictures and 990 test testing pictures, which when combined with the originals equaled 5000. That was relatively close enough to the total non-waldo pictures so I then split them accordingly to a testing dataset folder of ~1000 both waldo and non-waldo pictures each and did the same for my training dataset folder which contained about ~4000 each. I did this all by creating a class called WaldoGenerator that would generate these picture. To read more about my class click [here](https://github.com/ThomasADuffy/Whos-Waldo-Capstone-2/blob/master/src/waldo_generator.py).  
 ## **Testing the WaldoGenerator**
@@ -55,19 +75,23 @@ you can check out the code [here](https://github.com/ThomasADuffy/Whos-Waldo-Cap
 I started building a class which incorporated a CNN as one of the methods and attribute so I could pull various metrics and also load a previous model and utilize the class still if I needed. It also allowed me to save the model seamlessly and also save the metrics as a csv so I can plot with them much easier. To take a look at my class click [here](https://github.com/ThomasADuffy/Whos-Waldo-Capstone-2/blob/master/src/waldo_CNN.py). I created the CNN using Keras's sequential model and tried two different models. While editing all the hyperparameters. What I found was that the relu activation function was the best for my problem and every other activation function I tried would consistently give me below 70% accuracy. In addition I also tweaked the number of epochs and  batch size which didn't prove too useful as I will show how the epochs top out pretty early and the batch size really only helped around 50.  I also edited the layers and structure of my model quite a bit. The two models I found performed the best are shown below.
 
 ## **The First Model**
-<img src="/images/plots_structures/Model_v1.jpg" align="middle">  
-<img src="/images/plots_structures/Model_1.jpg" align="middle">
-
+<p align="center">
+<img src="/images/plots_structures/Model_v1.jpg">  
+<img src="/images/plots_structures/Model_1.jpg">
+</p>
 ## **The Second Model**
-<img src="/images/plots_structures/Model_v2.jpg" align="middle">  
-<img src="/images/plots_structures/Model_2.jpg" align="middle">
-
+<p align="center">
+<img src="/images/plots_structures/Model_v2.jpg" >  
+<img src="/images/plots_structures/Model_2.jpg">
+</p>
 # **The Results**
 To further test my model I also created a holdout set after the validation dataset, this consisted of 21 pictures(15 non-waldo and 6 waldo) so that I could test my data on data that there would have been absolutely no way it could have seen. After running these models I plotted their Accuracy and loss per epoch ran and also found which images they predicted wrong in the validation and holdout sets with the associated probability and weather it was a false negative or false positive. I did this all utilizing a plotting class I created so I could pull all of these metrics and plot them while also finding and creating the wrong images. To see the class please click [here](https://github.com/ThomasADuffy/Whos-Waldo-Capstone-2/blob/master/src/waldo_plotter.py).
 
 ## **Model 1 Results**
-For this model the Accuracy and Loss are shown below with the Accuracy and Loss for the holdout set listed also:  
+For this model the Accuracy and Loss are shown below with the Accuracy and Loss for the holdout set listed also: 
+<p align="center"> 
 <img src="/images/plots_structures/model_V1_plot.jpg" align="middle">  
+</p>
 
 | Epoch | Train Loss | Train Accuracy | Validation Loss | Validation Accuracy |
 | ------------- | ------------- | ------------- | ------------- | ------------- |
@@ -98,7 +122,9 @@ What I found is that it weighted very heavily on the red and white stripes as yo
 
 ## **Model 2 Results**
 For this model the Accuracy and Loss are shown below with the Accuracy and Loss for the holdout set listed also:  
+<p align="center"> 
 <img src="/images/plots_structures/model_V2_plot.jpg" align="middle">  
+</p>
 
 | Epoch | Train Loss | Train Accuracy | Validation Loss | Validation Accuracy |
 | ------------- | ------------- | ------------- | ------------- | ------------- |
@@ -131,8 +157,9 @@ From the images it seems to have also mainly heavily weighted the red color and 
 Going forward I would like to do more tweaking to my CNN mainly around batch size and layer composition. Some newer optimizers that recently came out like Radam and I would want to see how that would affect my model. I also want to do a test with black and white images and also grayscale to see how those affect predictions, especially due to how weighted it seemed the color red was.  
 
 Ultimately the goal of this is to create an app on your smart phone which would be able to recognize waldo real time through the camera and do object detection.
-
+<p align="center"> 
 <img src="/images/misc_imgs/hows_waldo.jpg" width="500">  
+</p>
 
 # **Readme Images and Data Credits/Sources**
 ## Readme Images sources
