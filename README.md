@@ -39,7 +39,7 @@ Therefor, I had to physically play Where's Waldo? for hours to get a good data s
 
  I still had a major class imbalance, I had 5337 non-waldo pictures and only 58 waldo pictures. Therefor I utilized Tensorflow's Keras ImageDataGenerator to generate more images of waldo which were augmented. One key factor was figuring about the hyperparameters of this image generator. As you can see from above in all the images, his head is always visible and also he is always upright with very little rotation, but he can face either left or right. Within my EDA notebook located [here](https://github.com/ThomasADuffy/Whos-Waldo-Capstone-2/blob/master/notebooks/EDA_ImgGeneration.ipynb) I tested out the images to see what they looked like before and after augmentation so that I knew my parameters were right. After much trial and error I found good parameters and ended up with the ImageGenerator as below:  
  ![Img Gen](/images/misc_imgs/imagegenerator_code.jpg)
- | **Before**  | **After** |
+ | **Before** | **After** |
 | ------------- | ------------- |
 | ![waldob1](/images/misc_imgs/waldobefore1.jpg)  | ![waldoa1](/images/misc_imgs/waldoafter1.jpg)  |
 | ![waldob2](/images/misc_imgs/waldobefore2.jpg)  | ![waldoa2](/images/misc_imgs/waldoafter2.jpg)  |
