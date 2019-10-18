@@ -41,8 +41,8 @@ Therefor, I had to physically play Where's Waldo? for hours to get a good data s
  ![Img Gen](/images/misc_imgs/imagegenerator_code.jpg)
  | **Before** | **After** |
 | ------------- | ------------- |
-| ![waldob1](/images/misc_imgs/waldobefore1.jpg)  | ![waldoa1](/images/misc_imgs/waldoafter1.jpg)  |
-| ![waldob2](/images/misc_imgs/waldobefore2.jpg)  | ![waldoa2](/images/misc_imgs/waldoafter2.jpg)  |
+| ![waldob1](/images/misc_imgs/waldobefore1.jpg) | ![waldoa1](/images/misc_imgs/waldoafter1.jpg) |
+| ![waldob2](/images/misc_imgs/waldobefore2.jpg) | ![waldoa2](/images/misc_imgs/waldoafter2.jpg) |
  As you can see I only really shifted him around and changed brightness and zoom with horizontal flipping. In order to prevent data leakage, I split my images into subsets of test and train before generating more images, 10 test and 48 train. Then I did the augmentation on them which I created enough to total the number of non-waldo pictures so I wouldnt have a class imbalance. This ended up being 3952 training pictures and 990 test testing pictures, which when combined with the originals equaled 5000. That was relatively close enough to the total non-waldo pictures so I then split them accordingly to a testing dataset folder of ~1000 both waldo and non-waldo pictures each and did the same for my training dataset folder which contained about ~4000 each. I did this all by creating a class called WaldoGenerator that would generate these picture. To read more about my class click [here](https://github.com/ThomasADuffy/Whos-Waldo-Capstone-2/blob/master/src/waldo_generator.py).  
 ## **Testing the WaldoGenerator**
 I ended up experimenting with the unittest library and creating a script that would test my waldo image generator. What it would do would test my class by instantiating a class with a input file directory with a test image in it and output directory located in my test directory and generate one image. then it would test that exactly one image was generated then delete the image after so you can run the test again seamlessly. The code is as follows:  
