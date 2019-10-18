@@ -47,8 +47,7 @@ I started building a class which incorporated a CNN as one of the methods and at
 
 ## **The First Model **
 The First model is shown below:  
-<img src="/images/plots_structures/Model_v1.jpg" width="350">
-<img src="/images/plots_structures/model_V1_FC.jpg" width="350">
+<img src="/images/plots_structures/Model_v1.jpg" width="450"> <img src="/images/plots_structures/model_V1_FC.jpg" width="350">
 <!-- ![test](/images/plots_structures/model_V1_FC.jpg)![test](/images/plots_structures/Model_v1.jpg) -->
 
 
