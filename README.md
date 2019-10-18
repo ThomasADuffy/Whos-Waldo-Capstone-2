@@ -8,6 +8,9 @@
 # **Table of Contents** <!-- omit in toc -->
 - [**Introduction**](#introduction)
 - [**EDA and Finding Data**](#eda-and-finding-data)
+  - [**Testing the WaldoGenerator**](#testing-the-waldogenerator)
+- [**Building the WaldoCNN**](#building-the-waldocnn)
+  - [**The First Model **](#the-first-model)
 - [**Readme Images and Data Credits/Sources**](#readme-images-and-data-creditssources)
   - [Readme Images sources](#readme-images-sources)
   - [Datasets sources](#datasets-sources)
@@ -27,13 +30,24 @@ I chose to go with RGB photos because color is a distinctive feature surrounding
 Therefor, I had to physically play Where's Waldo? for hours to get a good data set, from where I cropped the images to be 64x64(I did this from these two image galleries [here](https://imgur.com/gallery/8exqx) and [here](https://www.deviantart.com/where-is-waldo-wally/gallery/all)). I ended up with 58 total photos of just waldos face, a few examples are below.  
  ![Good Waldo1](/images/misc_imgs/goodwaldo_1.jpg) ![Good Waldo2](/images/misc_imgs/goodwaldo_2.jpg) ![Good Waldo3](/images/misc_imgs/goodwaldo_3.jpg) ![Good Waldo4](/images/misc_imgs/goodwaldo_4.jpg)
 
- I still had a major class imbalance, I had 5337 non-waldo pictures and only 58 waldo pictures. Therefor I utilized Tensorflow's Keras ImageDataGenerator to generate more images of waldo which were augmented. One key factor was figuring about the hyperparameters of this image generator. As you can see from above in all the images, his head is always visible and also he is always upright with very little rotation. Within my EDA notebook located [here](https://github.com/ThomasADuffy/Whos-Waldo-Capstone-2/blob/master/notebooks/EDA_ImgGeneration.ipynb) I tested out the images to see what they looked like before and after augmentation so that I knew my parameters were right. After much trial and error I found good parameters and ended up with the ImageGenerator as below:  
+ I still had a major class imbalance, I had 5337 non-waldo pictures and only 58 waldo pictures. Therefor I utilized Tensorflow's Keras ImageDataGenerator to generate more images of waldo which were augmented. One key factor was figuring about the hyperparameters of this image generator. As you can see from above in all the images, his head is always visible and also he is always upright with very little rotation, but he can face either left or right. Within my EDA notebook located [here](https://github.com/ThomasADuffy/Whos-Waldo-Capstone-2/blob/master/notebooks/EDA_ImgGeneration.ipynb) I tested out the images to see what they looked like before and after augmentation so that I knew my parameters were right. After much trial and error I found good parameters and ended up with the ImageGenerator as below:  
  ![Img Gen](/images/misc_imgs/imagegenerator_code.jpg)
  | **Before**  | **After** |
 | ------------- | ------------- |
 | ![waldob1](/images/misc_imgs/waldobefore1.jpg)  | ![waldoa1](/images/misc_imgs/waldoafter1.jpg)  |
 | ![waldob2](/images/misc_imgs/waldobefore2.jpg)  | ![waldoa2](/images/misc_imgs/waldoafter2.jpg)  |
- As you can see i only really shifted him around and changed brightness and zoom. In order to prevent data leakage, I split my images into subsets of test and train before generating more images, 10 test and 48 train. Then I did the augmentation on them which I created enough to total the number of non-waldo pictures so I wouldnt have a class imbalance. This ended up being 3952 training pictures and 990 test testing pictures, which when combined with the originals equaled 5000. That was relatively close enough to the total non-waldo pictures so I then split them accordingly to a testing dataset folder of ~1000 both waldo and non-waldo pictures each and did the same for my training dataset folder which contained about ~4000 each. I did this all by creating a class that would generate these picture. To read more about my class click [here](https://github.com/ThomasADuffy/Whos-Waldo-Capstone-2/blob/master/src/waldo_generator.py).
+ As you can see I only really shifted him around and changed brightness and zoom with horizontal flipping. In order to prevent data leakage, I split my images into subsets of test and train before generating more images, 10 test and 48 train. Then I did the augmentation on them which I created enough to total the number of non-waldo pictures so I wouldnt have a class imbalance. This ended up being 3952 training pictures and 990 test testing pictures, which when combined with the originals equaled 5000. That was relatively close enough to the total non-waldo pictures so I then split them accordingly to a testing dataset folder of ~1000 both waldo and non-waldo pictures each and did the same for my training dataset folder which contained about ~4000 each. I did this all by creating a class called WaldoGenerator that would generate these picture. To read more about my class click [here](https://github.com/ThomasADuffy/Whos-Waldo-Capstone-2/blob/master/src/waldo_generator.py).  
+## **Testing the WaldoGenerator**
+I ended up experimenting with the unittest library and creating a script that would test my waldo image generator. What it would do would test my class by instantiating a class with a input file directory with a test image in it and output directory located in my test directory and generate one image. then it would test that exactly one image was generated then delete the image after so you can run the test again seamlessly. The code is as follows:  
+![test](/images/misc_imgs/test_code.jpg)  
+you can check out the code [here](https://github.com/ThomasADuffy/Whos-Waldo-Capstone-2/blob/master/test/test_waldo_generator.py).  
+
+# **Building the WaldoCNN**
+I started building a class which incorporated a CNN as one of the methods and attribute so I could pull various metrics and also load a previous model and utilize the class still if I needed. It also allowed me to save the model seamlessly and also save the metrics as a csv so I can plot with them much easier. I created the CNN using Keras's sequential model and tried two different models.
+
+## **The First Model **
+The First model is shown below:  
+![test](/images/plots_structures/model_V1_FC.jpg)![test](/images/plots_structures/Model_v1.jpg)
 <!-- <img src="https://github.com/ThomasADuffy/Crypto-Capstone-1/blob/master/imgs/ETH_logo.png" height="256">
 
 ><span style=font-size:1.1em;>Is the correlation between the count of tweets per day and price of each coin?</span>  
