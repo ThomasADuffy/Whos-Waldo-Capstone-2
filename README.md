@@ -11,6 +11,7 @@
   - [**Testing the WaldoGenerator**](#testing-the-waldogenerator)
 - [**Building the WaldoCNN**](#building-the-waldocnn)
   - [**The First Model **](#the-first-model)
+  - [**The Second Model**](#the-second-model)
 - [**Readme Images and Data Credits/Sources**](#readme-images-and-data-creditssources)
   - [Readme Images sources](#readme-images-sources)
   - [Datasets sources](#datasets-sources)
@@ -46,13 +47,13 @@ you can check out the code [here](https://github.com/ThomasADuffy/Whos-Waldo-Cap
 I started building a class which incorporated a CNN as one of the methods and attribute so I could pull various metrics and also load a previous model and utilize the class still if I needed. It also allowed me to save the model seamlessly and also save the metrics as a csv so I can plot with them much easier. I created the CNN using Keras's sequential model and tried two different models.
 
 ## **The First Model **
-The First model is shown below:  
+The first model is shown below:  
 <img src="/images/plots_structures/Model_v1.jpg" width="450"> <img src="/images/plots_structures/model_V1_FC.jpg" width="350">
 <!-- ![test](/images/plots_structures/model_V1_FC.jpg)![test](/images/plots_structures/Model_v1.jpg) -->
 
-
-><span style=font-size:1.1em;>Is the correlation between the count of tweets per day and price of each coin?</span>  
-> And if there is a correlation, is this a negative or positive correlation? -->
+## **The Second Model**
+The second model is shown below:  
+<img src="/images/plots_structures/Model_v2.jpg" width="450"> <img src="/images/plots_structures/model_V2_FC.jpg" width="350">
 
 
 # **Readme Images and Data Credits/Sources**
