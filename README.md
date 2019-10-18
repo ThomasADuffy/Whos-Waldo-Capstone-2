@@ -79,6 +79,7 @@ I started building a class which incorporated a CNN as one of the methods and at
 <img src="/images/plots_structures/Model_v1.jpg">  
 <img src="/images/plots_structures/Model_1.jpg">
 </p>
+
 ## **The Second Model**
 <p align="center">
 <img src="/images/plots_structures/Model_v2.jpg" >  
