@@ -132,7 +132,7 @@ Going forward I would like to do more tweaking to my CNN mainly around batch siz
 
 Ultimately the goal of this is to create an app on your smart phone which would be able to recognize waldo real time through the camera and do object detection.
 
-
+<img src="/images/misc_imgs/hows_waldo.jpg" width="500">  
 
 # **Readme Images and Data Credits/Sources**
 ## Readme Images sources
