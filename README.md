@@ -17,6 +17,7 @@
     - [Images it Got Wrong](#images-it-got-wrong)
   - [**Model 2 Results**](#model-2-results)
     - [Images it Got Wrong](#images-it-got-wrong-1)
+- [**Further Work**](#further-work)
 - [**Readme Images and Data Credits/Sources**](#readme-images-and-data-creditssources)
   - [Readme Images sources](#readme-images-sources)
   - [Datasets sources](#datasets-sources)
@@ -86,12 +87,10 @@ This model got the following images wrong:
 <img src="/images/model_wrong_images/model_v1_used/1.jpg" width="400"> <img src="/images/model_wrong_images/model_v1_used/2.jpg" width="400"> 
 <img src="/images/model_wrong_images/model_v1_used/3.jpg" width="400"> <img src="/images/model_wrong_images/model_v1_used/4.jpg" width="400"> 
 <img src="/images/model_wrong_images/model_v1_used/5.jpg" width="400"> <img src="/images/model_wrong_images/model_v1_used/6.jpg" width="400"> 
-<img src="/images/model_wrong_images/model_v1_used/7.jpg" width="400"> <img src="/images/model_wrong_images/model_v1_used/8.jpg" width="400"> 
-<img src="/images/model_wrong_images/model_v1_used/9.jpg" width="400"> <img src="/images/model_wrong_images/model_v1_used/10.jpg" width="400"> 
-<img src="/images/model_wrong_images/model_v1_used/11.jpg" width="400"> <img src="/images/model_wrong_images/model_v1_used/12.jpg" width="400"> 
-<img src="/images/model_wrong_images/model_v1_used/13.jpg" width="400">  
+<img src="/images/model_wrong_images/model_v1_used/8.jpg" width="400"> <img src="/images/model_wrong_images/model_v1_used/9.jpg" width="400">
+<img src="/images/model_wrong_images/model_v1_used/10.jpg" width="400"> <img src="/images/model_wrong_images/model_v1_used/13.jpg" width="400">  
 
-What I found is that it weighted very heavily on the red and white stripes as you can see the probability of that is almost 90%. It also seemed to weight his hair a good amount as you can see in the picture two where the random man is heavily predicted to be waldo I presumably due to his hair style.
+What I found is that it weighted very heavily on the red and white stripes as you can see the probability of that is almost 90%. It also seemed to weight his hair a good amount as you can see in the picture two where the random man is heavily predicted to be waldo I presumably due to his hair style. Out of all the validation pictures it got 193 wrong out of 2000 and for the hold out it got 2 wrong out of 21.To see all wrong images click [here](https://github.com/ThomasADuffy/Whos-Waldo-Capstone-2/tree/master/images/model_wrong_images/Model_V1_wrong_images).
 
 
 
@@ -118,13 +117,20 @@ This model performed the best as it 95.2 percent accurate on the hold out set wi
 This model got the following images wrong:  
 <img src="/images/model_wrong_images/model_v2_used/1.jpg" width="400"><img src="/images/model_wrong_images/model_v2_used/2.jpg" width="400">
 <img src="/images/model_wrong_images/model_v2_used/3.jpg" width="400"><img src="/images/model_wrong_images/model_v2_used/4.jpg" width="400">
-<img src="/images/model_wrong_images/model_v2_used/5.jpg" width="400"><img src="/images/model_wrong_images/model_v2_used/6.jpg" width="400">
-<img src="/images/model_wrong_images/model_v2_used/7.jpg" width="400"><img src="/images/model_wrong_images/model_v2_used/8.jpg" width="400">
-<img src="/images/model_wrong_images/model_v2_used/9.jpg" width="400"><img src="/images/model_wrong_images/model_v2_used/10.jpg" width="400">
+<img src="/images/model_wrong_images/model_v2_used/6.jpg" width="400"><img src="/images/model_wrong_images/model_v2_used/7.jpg" width="400">
+<img src="/images/model_wrong_images/model_v2_used/8.jpg" width="400"><img src="/images/model_wrong_images/model_v2_used/9.jpg" width="400">
 <img src="/images/model_wrong_images/model_v2_used/11.jpg" width="400"><img src="/images/model_wrong_images/model_v2_used/12.jpg" width="400">
-<img src="/images/model_wrong_images/model_v2_used/13.jpg" width="400"><img src="/images/model_wrong_images/model_v2_used/14.jpg" width="400">
-<img src="/images/model_wrong_images/model_v2_used/15.jpg" width="400"><img src="/images/model_wrong_images/model_v2_used/16.jpg" width="400">
-<img src="/images/model_wrong_images/model_v2_used/17.jpg"
+<img src="/images/model_wrong_images/model_v2_used/13.jpg" width="400"><img src="/images/model_wrong_images/model_v2_used/16.jpg" width="400">
+<img src="/images/model_wrong_images/model_v2_used/17.jpg" width="400">
+
+From the images it seems to have also mainly heavily weighted the red color and stripes but also it seemed to have picked up on human shape which is pretty interesting. The large picture of his face was a probability of 44% so that is almost at the threshold of .5 which would have made it a positive, but it also seemed to miss on some key images where his face is clear. Out of all the validation pictures it got 141 wrong out of 2000 and for the hold out it got 1 wrong out of 21. To see all wrong images click [here](https://github.com/ThomasADuffy/Whos-Waldo-Capstone-2/tree/master/images/model_wrong_images/Model_V2_wrong_images).
+
+# **Further Work**
+Going forward I would like to do more tweaking to my CNN mainly around batch size and layer composition. Some newer optimizers that recently came out like Radam and I would want to see how that would affect my model. I also want to do a test with black and white images and also grayscale to see how those affect predictions, especially due to how weighted it seemed the color red was.  
+
+Ultimately the goal of this is to create an app on your smart phone which would be able to recognize waldo real time through the camera and do object detection.
+
+
 
 # **Readme Images and Data Credits/Sources**
 ## Readme Images sources
