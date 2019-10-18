@@ -16,6 +16,7 @@
   - [**Model 1 Results**](#model-1-results)
     - [Images it Got Wrong](#images-it-got-wrong)
   - [**Model 2 Results**](#model-2-results)
+    - [Images it Got Wrong](#images-it-got-wrong-1)
 - [**Readme Images and Data Credits/Sources**](#readme-images-and-data-creditssources)
   - [Readme Images sources](#readme-images-sources)
   - [Datasets sources](#datasets-sources)
@@ -109,8 +110,21 @@ For this model the Accuracy and Loss are shown below with the Accuracy and Loss 
 | 7 |0.03518686805214004|0.9879503|0.3612544197225716|0.9135618|
 | 8 |0.02434018259558549|0.99155277|0.09945626059410775|0.9642325|
 | 9 |0.032404230222082844|0.9888199|0.3032174304741003|0.92896175|
-| 10 |0.015606344389542648|0.99391305|0.28480060130539464|0.9299553|
-This model performed the best as it 90.5 percent accurate on the hold out set with a loss of .583. As you can see the at around epoch 3 it starts to experience diminishing returns with the accuracy and around 6 it really starts to flatten off.
+| 10 |0.015606344389542648|0.99391305|0.28480060130539464|0.9299553|  
+
+This model performed the best as it 95.2 percent accurate on the hold out set with a loss of .584. On the validation data it seemed extremely good at epoch 8 and would probably would have been the best model at 96% accuracy and .09 loss. Thought throughout the epochs it seemed that this model was extremely good. As you can see the at around epoch 3 it also starts to experience diminishing returns with the accuracy and around 6 it really starts to flatten off, just like model 1.  
+
+### Images it Got Wrong
+This model got the following images wrong:  
+<img src="/images/model_wrong_images/model_v2_used/1.jpg" width="400"><img src="/images/model_wrong_images/model_v2_used/2.jpg" width="400">
+<img src="/images/model_wrong_images/model_v2_used/3.jpg" width="400"><img src="/images/model_wrong_images/model_v2_used/4.jpg" width="400">
+<img src="/images/model_wrong_images/model_v2_used/5.jpg" width="400"><img src="/images/model_wrong_images/model_v2_used/6.jpg" width="400">
+<img src="/images/model_wrong_images/model_v2_used/7.jpg" width="400"><img src="/images/model_wrong_images/model_v2_used/8.jpg" width="400">
+<img src="/images/model_wrong_images/model_v2_used/9.jpg" width="400"><img src="/images/model_wrong_images/model_v2_used/10.jpg" width="400">
+<img src="/images/model_wrong_images/model_v2_used/11.jpg" width="400"><img src="/images/model_wrong_images/model_v2_used/12.jpg" width="400">
+<img src="/images/model_wrong_images/model_v2_used/13.jpg" width="400"><img src="/images/model_wrong_images/model_v2_used/14.jpg" width="400">
+<img src="/images/model_wrong_images/model_v2_used/15.jpg" width="400"><img src="/images/model_wrong_images/model_v2_used/16.jpg" width="400">
+<img src="/images/model_wrong_images/model_v2_used/17.jpg"
 
 # **Readme Images and Data Credits/Sources**
 ## Readme Images sources
