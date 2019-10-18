@@ -48,11 +48,12 @@ you can check out the code [here](https://github.com/ThomasADuffy/Whos-Waldo-Cap
 I started building a class which incorporated a CNN as one of the methods and attribute so I could pull various metrics and also load a previous model and utilize the class still if I needed. It also allowed me to save the model seamlessly and also save the metrics as a csv so I can plot with them much easier. To take a look at my class click [here](https://github.com/ThomasADuffy/Whos-Waldo-Capstone-2/blob/master/src/waldo_CNN.py). I created the CNN using Keras's sequential model and tried two different models. While editing all the hyperparameters. What I found was that the relu activation function was the best for my problem and every other activation function I tried would consistently give me below 70% accuracy. In addition I also tweaked the number of epochs and  batch size which didn't prove too useful as I will show how the epochs top out pretty early and the batch size really only helped around 50.  I also edited the layers and structure of my model quite a bit. The two models I found performed the best are shown below.
 
 ## **The First Model**
-<img src="/images/plots_structures/Model_v1.jpg" width="450">  
-<img src="/images/plots_structures/Model_1.jpg">
+<img src="/images/plots_structures/Model_v1.jpg" width="450" align='center'>  
+<img src="/images/plots_structures/Model_1.jpg" align='center'>
+
 ## **The Second Model**
-<img src="/images/plots_structures/Model_v2.jpg" width="450">  
-<img src="/images/plots_structures/Model_2.jpg">
+<img src="/images/plots_structures/Model_v2.jpg" width="450" align='center'>  
+<img src="/images/plots_structures/Model_2.jpg" align='center'>
 
 # **The Results**
 
