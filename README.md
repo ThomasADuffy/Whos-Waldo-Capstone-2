@@ -82,13 +82,13 @@ This model performed actually very well as it 90.5 percent accurate on the hold 
 
 ### Images it Got Wrong
 This model got the following images wrong:  
-<img src="/images/model_wrong_images/model_v1_used/1.jpg" align="middle"> <img src="/images/model_wrong_images/model_v1_used/2.jpg" align="middle"> 
-<img src="/images/model_wrong_images/model_v1_used/3.jpg" align="middle"> <img src="/images/model_wrong_images/model_v1_used/4.jpg" align="middle"> 
-<img src="/images/model_wrong_images/model_v1_used/5.jpg" align="middle"> <img src="/images/model_wrong_images/model_v1_used/6.jpg" align="middle"> 
-<img src="/images/model_wrong_images/model_v1_used/7.jpg" align="middle"> <img src="/images/model_wrong_images/model_v1_used/8.jpg" align="middle"> 
-<img src="/images/model_wrong_images/model_v1_used/9.jpg" align="middle"> <img src="/images/model_wrong_images/model_v1_used/10.jpg" align="middle"> 
-<img src="/images/model_wrong_images/model_v1_used/11.jpg" align="middle"> <img src="/images/model_wrong_images/model_v1_used/12.jpg" align="middle"> 
-<img src="/images/model_wrong_images/model_v1_used/13.jpg" align="middle"> 
+<img src="/images/model_wrong_images/model_v1_used/1.jpg" width="300"> <img src="/images/model_wrong_images/model_v1_used/2.jpg" width="300"> 
+<img src="/images/model_wrong_images/model_v1_used/3.jpg" width="300"> <img src="/images/model_wrong_images/model_v1_used/4.jpg" width="300"> 
+<img src="/images/model_wrong_images/model_v1_used/5.jpg" width="300"> <img src="/images/model_wrong_images/model_v1_used/6.jpg" width="300"> 
+<img src="/images/model_wrong_images/model_v1_used/7.jpg" width="300"> <img src="/images/model_wrong_images/model_v1_used/8.jpg" width="300"> 
+<img src="/images/model_wrong_images/model_v1_used/9.jpg" width="300"> <img src="/images/model_wrong_images/model_v1_used/10.jpg" width="300"> 
+<img src="/images/model_wrong_images/model_v1_used/11.jpg" width="300"> <img src="/images/model_wrong_images/model_v1_used/12.jpg" width="300"> 
+<img src="/images/model_wrong_images/model_v1_used/13.jpg" width="300"> 
 
 
 
