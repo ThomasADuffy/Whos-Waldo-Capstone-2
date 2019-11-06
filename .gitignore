@@ -5,5 +5,10 @@
 # In all directories within the repo, ignore .DS_Store (This isn't needed on linux)
 **/.DS_Store
 
+
 /data/Waldo\ repo\ Images
+
 **/.vscode
+
+data/Keras\ Generated/Generate/waldo/generated
+data/Keras\ Generated/Generate_zoom/waldo/generated

@@ -7,6 +7,8 @@ from tensorflow.keras.models import load_model
 from skimage import io, transform, color
 from tensorflow.keras.utils import to_categorical, plot_model
 from tensorflow.keras.metrics import Precision, Recall
+from tensorflow.keras.callbacks import ModelCheckpoint
+from tensorflow.keras import callbacks
 import os
 import sys
 import csv
@@ -14,6 +16,7 @@ import csv
 SCRIPT_DIRECTORY = os.path.realpath(__file__)
 ROOT_DIRECTORY = os.path.split(os.path.split(SCRIPT_DIRECTORY)[0])[0]
 MODEL_DIRECTORY = os.path.join(ROOT_DIRECTORY, 'model')
+LOGDIR_DIRECTORY = os.path.join(MODEL_DIRECTORY, 'logdir')
 
 
 class WaldoCNN():
@@ -51,7 +54,8 @@ class WaldoCNN():
                 batch_size=self.batchsize,
                 class_mode='binary',
                 color_mode='rgb',
-                target_size=(64, 64))
+                target_size=(64, 64),
+                shuffle=True)
         self.validation_generator = self.test_datagen.flow_from_directory(
                 self.test_data_loc,
                 batch_size=self.batchsize,
@@ -73,30 +77,32 @@ class WaldoCNN():
                                                  self.load_model))
         else:
             self.model = Sequential()
-            self.model.add(Conv2D(64, (4, 4), input_shape=(64, 64, 3),
+            self.model.add(Conv2D(64, (2, 2), input_shape=(64, 64, 3),
                                   padding='valid',
                                   name='Convolution-1',
                                   activation='relu'))
-            self.model.add(Conv2D(32, (4, 4), padding='valid',
+            self.model.add(Conv2D(64, (2, 2), padding='valid',
                                   name='Convolution-2',
                                   activation='relu'))
-            self.model.add(MaxPooling2D(pool_size=(4, 4),
+            self.model.add(MaxPooling2D(pool_size=(2, 2),
                                         name='Pooling-1'))
+            self.model.add(Dropout(0.05))
 
-            self.model.add(Conv2D(32, (2, 2), padding='valid',
+            self.model.add(Conv2D(128, (2, 2), padding='valid',
                                   name='Convolution-3',
                                   activation='relu'))
-            self.model.add(Conv2D(64, (2, 2), padding='valid',
+            self.model.add(Conv2D(128, (2, 2), padding='valid',
                                   name='Convolution-4',
                                   activation='relu'))
             self.model.add(MaxPooling2D(pool_size=(2, 2),
                                         name='Pooling-2'))
+            self.model.add(Dropout(0.10))
 
             self.model.add(Flatten())
-            self.model.add(Dense(64,
+            self.model.add(Dense(256,
                                  name='Dense-1',
                                  activation='relu'))
-            self.model.add(Dropout(0.25))
+            self.model.add(Dropout(0.1))
             self.model.add(Dense(1,
                                  name='Dense-2',
                                  activation='sigmoid'))
@@ -107,6 +113,25 @@ class WaldoCNN():
 
     def fit(self):
         ''' This will fit the model with the data inputed'''
+
+        tensorboard = callbacks.TensorBoard(
+            log_dir=LOGDIR_DIRECTORY,
+            histogram_freq=0, 
+            write_graph=True,
+            update_freq='epoch')
+
+        savename = os.path.join(MODEL_DIRECTORY, f"model_v{self.version}_best.h5")
+
+
+        mc = callbacks.ModelCheckpoint(
+            savename,
+            monitor='val_recall', 
+            verbose=0, 
+            save_best_only=True, 
+            mode='max', 
+            save_freq='epoch')
+        
+        self.callbacklst = [mc]
 
         self.hist = self.model.fit_generator(self.train_generator,
                                              steps_per_epoch=None,
@@ -120,6 +145,7 @@ class WaldoCNN():
                                              workers=1,
                                              use_multiprocessing=False,
                                              shuffle=True, initial_epoch=0)
+
         self.score_model()
         self.metrics = self.hist.history
         self.save_question()
@@ -152,6 +178,8 @@ class WaldoCNN():
         print('Tested on holdout set:')
         print('Test score:', self.score[0])
         print('Test accuracy:', self.score[1])
+        print('Test percision:', self.score[2])
+        print('Test recall:', self.score[3])
 
     def save_question(self):
         ''' This will ask to save model and will save it prompted too'''
@@ -170,8 +198,10 @@ class WaldoCNN():
 
 
 if __name__ == '__main__':
-    waldo = WaldoCNN(50, 10, 'data/Keras Generated/Train',
+    waldo = WaldoCNN(15, 5, 'data/Keras Generated/New_Train',
                      'data/Keras Generated/Test',
                      'data/Keras Generated/Holdout', 3)
-
-    waldo.fit()
+                   
+    response = input('fit?')
+    if response.lower() == 'y':
+        waldo.fit()

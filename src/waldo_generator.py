@@ -1,8 +1,8 @@
 from tensorflow.keras.preprocessing.image import ImageDataGenerator
 import sys
 import os
-SCRIPT_DIRECTORY = os.path.realpath(__file__)
-ROOT_DIRECTORY = os.path.split(SCRIPT_DIRECTORY)[0]
+SCRIPT_DIRECTORY = os.path.abspath(__file__)
+ROOT_DIRECTORY = os.path.split(os.path.split(SCRIPT_DIRECTORY)[0])[0]
 sys.path.append(ROOT_DIRECTORY)
 
 
@@ -24,7 +24,7 @@ class WaldoGenerator(object):
                                             rescale=1./255,
                                             shear_range=0,
                                             zoom_range=0.2,
-                                            brightness_range=(.7, 1.3),
+                                            brightness_range=(.8, 1.2),
                                             horizontal_flip=True,
                                             vertical_flip=False,
                                             fill_mode='nearest')
@@ -57,12 +57,12 @@ class WaldoGenerator(object):
 
 if __name__ == '__main__':
 
-    WaldoGenerator(os.path.join(ROOT_DIRECTORY, 'data/Keras Generated/Train'),
+    WaldoGenerator(os.path.join(ROOT_DIRECTORY, 'data/Keras Generated/Generate'),
                    os.path.join(ROOT_DIRECTORY,
-                                'data/Keras Generated/Train/waldo/generated'),
-                   3950)
+                                'data/Keras Generated/Generate/waldo/generated'),
+                   4500)
 
-    WaldoGenerator(os.path.join(ROOT_DIRECTORY, 'data/Keras Generated/Test'),
-                   os.path.join(ROOT_DIRECTORY,
-                                'data/Keras Generated/Test/waldo/generated'),
-                   987)
+    # WaldoGenerator(os.path.join(ROOT_DIRECTORY, 'data/Keras Generated/Test'),
+    #                os.path.join(ROOT_DIRECTORY,
+    #                             'data/Keras Generated/Test/waldo/generated'),
+    #                987)
