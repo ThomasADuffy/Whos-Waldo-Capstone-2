@@ -153,9 +153,9 @@ From the images it seems to have also mainly heavily weighted the red color and 
 Going forward I would like to do more tweaking to my CNN mainly around batch size and layer composition. Some newer optimizers that recently came out like Radam and I would want to see how that would affect my model. I also want to do a test with black and white images and also grayscale to see how those affect predictions, especially due to how weighted it seemed the color red was.  
 
 Ultimately the goal of this is to create an app on your smart phone which would be able to recognize waldo real time through the camera and do object detection.
-<p align="center"> 
+<!-- <p align="center"> 
 <img src="/images/misc_imgs/hows_waldo.jpg" width="500">  
-</p>
+</p> -->
 
 # **Readme Images and Data Credits/Sources**
 ## Readme Images sources
