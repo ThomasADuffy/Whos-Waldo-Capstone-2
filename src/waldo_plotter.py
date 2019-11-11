@@ -28,6 +28,7 @@ class WaldoPlotter():
         self.df = df
         self.score_loss = score[0]
         self.score_accuracy = score[1]
+
         self.waldo = waldo
 
     def create_accuracy_loss(self, figloc):
@@ -52,6 +53,30 @@ class WaldoPlotter():
         a = self.score_accuracy
         ls = self.score_loss
         fig.suptitle(f'Model V{self.waldo.version} Loss:{ls} Acc:{a} (on holdout)',
+                     fontsize=18)
+        plt.savefig(figloc)
+
+    def create_precision_accuracy(self, figloc):
+        '''This will plot the precision and recall plots for the model
+        Input:
+        figloc- this is where it will save the plot'''
+
+        fig, ax = plt.subplots(1, 2, figsize=(10, 8))
+        ax[0].plot(self.df['precision'], lw=3, marker='.')
+        ax[0].plot(self.df['val_precision'], lw=3, marker='.')
+        ax[0].set_title('Model Precision')
+        ax[0].set_ylabel('Precision', fontsize=18)
+        ax[0].set_xlabel('Epoch', fontsize=18)
+        ax[0].legend(['Train', 'Test'], loc='upper left')
+
+        ax[1].plot(self.df['recall'], lw=3, marker='.')
+        ax[1].plot(self.df['val_recall'], lw=3, marker='.')
+        ax[1].set_title('Model Recall')
+        ax[1].set_ylabel('Recall', fontsize=18)
+        ax[1].set_xlabel('Epoch', fontsize=18)
+        ax[1].legend(['Train', 'Test'], loc='upper left')
+
+        fig.suptitle(f'Model V{self.waldo.version}',
                      fontsize=18)
         plt.savefig(figloc)
 

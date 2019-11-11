@@ -160,9 +160,14 @@ Ultimately the goal of this is to create an app on your smart phone which would 
 # **Readme Images and Data Credits/Sources**
 ## Readme Images sources
 Title picture: https://i.ytimg.com/vi/U9g6cHcTkaA/maxresdefault.jpg  
+  
 Tensorflow/Keras picture: https://hackernoon.com/tf-serving-keras-mobilenetv2-c167b4b2bb25  
-## Datasets sources
-Constantinou , Valentino : vc1492a, 2018, Hey Waldo, V1.8, Github, https://github.com/vc1492a/Hey-Waldo  
-Waldo Picture Gallery : https://imgur.com/gallery/8exqx  
-Waldo Pictures Gallery : https://www.deviantart.com/where-is-waldo-wally/gallery/all
+
+## Datasets sources  
+Constantinou , Valentino : vc1492a, 2018, Hey Waldo, V1.8, Github, https://github.com/vc1492a/Hey-Waldo    
+  
+Handford, Martin. Where's Waldo? * Somerville, MA :Candlewick Press, 2007.  
+
+  
+*(The entire collection of Wheres Waldo Books was used, Scanned images of pages for data.)
 

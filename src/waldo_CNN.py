@@ -98,8 +98,18 @@ class WaldoCNN():
                                         name='Pooling-2'))
             self.model.add(Dropout(0.10))
 
+            self.model.add(Conv2D(256, (2, 2), padding='valid',
+                                  name='Convolution-5',
+                                  activation='relu'))
+            self.model.add(Conv2D(256, (2, 2), padding='valid',
+                                  name='Convolution-6',
+                                  activation='relu'))
+            self.model.add(MaxPooling2D(pool_size=(2, 2),
+                                        name='Pooling-3'))
+            self.model.add(Dropout(0.1))
+
             self.model.add(Flatten())
-            self.model.add(Dense(256,
+            self.model.add(Dense(512,
                                  name='Dense-1',
                                  activation='relu'))
             self.model.add(Dropout(0.1))
@@ -114,29 +124,28 @@ class WaldoCNN():
     def fit(self):
         ''' This will fit the model with the data inputed'''
 
-        tensorboard = callbacks.TensorBoard(
-            log_dir=LOGDIR_DIRECTORY,
-            histogram_freq=0, 
-            write_graph=True,
-            update_freq='epoch')
+        # tensorboard = callbacks.TensorBoard(
+        #     log_dir=LOGDIR_DIRECTORY,
+        #     histogram_freq=0, 
+        #     write_graph=True,
+        #     update_freq='epoch')
 
         savename = os.path.join(MODEL_DIRECTORY, f"model_v{self.version}_best.h5")
 
 
-        mc = callbacks.ModelCheckpoint(
+        mc = ModelCheckpoint(
             savename,
             monitor='val_recall', 
-            verbose=0, 
+            verbose=1, 
             save_best_only=True, 
             mode='max', 
             save_freq='epoch')
         
-        self.callbacklst = [mc]
 
         self.hist = self.model.fit_generator(self.train_generator,
                                              steps_per_epoch=None,
                                              epochs=self.epochs, verbose=1,
-                                             callbacks=None,
+                                             callbacks=[mc],
                                              validation_data=self.validation_generator,
                                              validation_steps=None,
                                              validation_freq=1,
@@ -144,7 +153,7 @@ class WaldoCNN():
                                              max_queue_size=10,
                                              workers=1,
                                              use_multiprocessing=False,
-                                             shuffle=True, initial_epoch=0)
+                                             shuffle=True, initial_epoch=0,)
 
         self.score_model()
         self.metrics = self.hist.history
@@ -198,9 +207,9 @@ class WaldoCNN():
 
 
 if __name__ == '__main__':
-    waldo = WaldoCNN(15, 5, 'data/Keras Generated/New_Train',
+    waldo = WaldoCNN(10, 5, 'data/Keras Generated/New_Train',
                      'data/Keras Generated/Test',
-                     'data/Keras Generated/Holdout', 3)
+                     'data/Keras Generated/Holdout', 4)
                    
     response = input('fit?')
     if response.lower() == 'y':
